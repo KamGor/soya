@@ -1,0 +1,3 @@
+# Soya
+
+Central configuration repository.
