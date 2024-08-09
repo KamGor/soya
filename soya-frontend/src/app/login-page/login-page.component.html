@@ -1,0 +1,16 @@
+<div class="h-full w-full flex flex-row justify-center items-center">
+    <div class="flex flex-col relative px-[30px] py-[35px] rounded-xl min-w-[25%] bg-white">
+        <span class="absolute text-5xl font-bold top-[-60px] left-0 text-white w-full text-center">
+            Soya
+        </span>
+        <span class="text-3xl font-bold text-blue-600">Logowanie</span>
+        <div class="flex flex-col gap-6 my-5">
+            <input [(ngModel)]="login" type="text" placeholder="Login/Email" class="p-3 rounded bg-transparent text-lg outline-none bg-blue-50 text-black placeholder:text-blue-300">
+            <input [(ngModel)]="password" type="password" placeholder="Hasło" class="p-3 rounded bg-transparent text-lg outline-none bg-blue-50 text-black placeholder:text-blue-300">
+        </div>
+        <div class="flex flex-row justify-start">
+            <button class="py-3 px-4 bg-[#29a4ff] text-lg font-bold text-white rounded" (click)="submit()">Zaloguj się</button>
+            <button class="py-3 px-4 bg-[#29a4ff] text-lg font-bold text-white rounded" (click)="check()">Sprawdź</button>
+        </div>
+    </div>
+</div>

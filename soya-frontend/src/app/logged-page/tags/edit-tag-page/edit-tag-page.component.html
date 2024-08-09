@@ -1,0 +1,35 @@
+<form [formGroup]="addTagForm" class="flex flex-col w-full min-h-full max-h-full pr-[24px] gap-4" (ngSubmit)="submit()">
+    <div class="flex flex-row p-4 bg-white rounded-xl justify-between text-[#8E8E93]">
+        <div class="flex flex-row items-center gap-2">
+            <a routerLink=".." title="Return to list" class="flex flex-row items-center">
+                <i class="icon-[mdi--arrow-left] text-2xl"></i>
+            </a>
+            <span class="font-bold text-lg">
+                Editing tag
+            </span>
+        </div>
+        <div class="flex flex-row">
+            <button type="button" title="Show help" class="flex flex-row items-center rounded-full p-1">
+                <i class="icon-[mdi--help-circle-outline] text-2xl"></i>
+            </button>
+            <button type="reset" title="Clear" class="flex flex-row items-center rounded-full p-1 text-[#EB5757]">
+                <i class="icon-[mdi--undo-variant] text-2xl"></i>
+            </button>
+            <button type="submit" title="Submit" class="flex flex-row items-center rounded-full p-1 text-green-500">
+                <i class="icon-[mdi--check-bold] text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-col min-h-full h-full max-h-full w-full bg-white p-4 pr-0 rounded-xl flex-grow relative">
+        <div class="flex flex-col min-h-full h-full max-h-full w-full bg-white p-4 rounded-xl flex-grow overflow-y-auto gap-2" formGroupName="items">
+            <div class="flex flex-row w-full gap-3 text-[#8E8E93]" *ngFor="let item of itemsTagForm.controls; let index = index; let amount = count;" [formArrayName]="index">
+                <div class="flex flex-col w-1/2 gap-1">
+                    <label for="name" class="font-semibold">Tag name</label>
+                    <div class="flex flex-row items-center gap-2">
+                        <input title="name" id="name" type="text" class="bg-[#f7f7f7] p-2 rounded-lg outline-none w-full" formControlName="name">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

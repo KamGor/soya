@@ -1,0 +1,67 @@
+<div class="flex flex-col min-w-[100vw] min-h-[100vh] max-h-[100vh] bg-[#F7F7F7] items-stretch">
+    <div class="flex flex-row bg-[white] min-w-full h-[64px] rounded-b-2xl p-[32px]">
+        <div class="flex flex-row justify-between w-full">
+            <div class="flex flex-row items-center gap-1 text-[#8E8E93]"> 
+                <i class="icon-[mdi--account-circle-outline] text-3xl"></i>
+                <span class="text-xl">
+                    Kamil
+                </span>
+            </div>
+            <div class="flex">
+                 <button title="Logout" class="h-full flex flex-row items-center">
+                    <i class="icon-[mdi--power] text-3xl text-[#EB5757]"></i>
+                 </button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-row w-full items-stretch h-full min-h-full flex-grow py-[24px]">
+        <div class="flex flex-col w-[320px] justify-between px-[24px] min-h-full">
+            <div class="flex flex-col p-[32px] rounded-2xl bg-[#FFFFFF] gap-4">
+                <a routerLink="/dashboard" [routerLinkActive]="['!text-[#2F80ED]', '!bg-[#EBF3FE]']" class="px-[16px] py-[8px] rounded flex flex-row gap-4 items-center text-[#8E8E93]">
+                    <i class="icon-[mdi--view-dashboard] text-xl"></i>
+                    <span class="font-semibold text-lg">
+                        Dashboard
+                    </span>
+                </a>
+                <a routerLink="/configs" [routerLinkActive]="['!text-[#2F80ED]', '!bg-[#EBF3FE]']" class="px-[16px] py-[8px] rounded flex flex-row gap-4 items-center text-[#8E8E93]">
+                    <i class="icon-[mdi--cogs] text-xl "></i>
+                    <span class="font-semibold text-lg">
+                        Configs
+                    </span>
+                </a>
+                <a routerLink="/tags" [routerLinkActive]="['!text-[#2F80ED]', '!bg-[#EBF3FE]']" class="px-[16px] py-[8px] rounded flex flex-row gap-4 items-center text-[#8E8E93]">
+                    <i class="icon-[mdi--tag] text-xl "></i>
+                    <span class="font-semibold text-lg">
+                        Tags
+                    </span>
+                </a>
+                <a routerLink="/users" [routerLinkActive]="['!text-[#2F80ED]', '!bg-[#EBF3FE]']" class="px-[16px] py-[8px] rounded flex flex-row gap-4 items-center text-[#8E8E93]">
+                    <i class="icon-[mdi--users] text-xl"></i>
+                    <span class="font-semibold text-lg">
+                        Users
+                    </span>
+                </a>
+                <a routerLink="/connections" [routerLinkActive]="['!text-[#2F80ED]', '!bg-[#EBF3FE]']" class="px-[16px] py-[8px] rounded flex flex-row gap-4 items-center text-[#8E8E93]">
+                    <i class="icon-[mdi--connection] text-xl"></i>
+                    <span class="font-semibold text-lg">
+                        Connections
+                    </span>
+                </a>
+            </div>
+            <div class="relative bg-[#FFFFFF] w-full p-4 flex flex-col items-center gap-y-6 rounded-2xl">
+                <div class="font-black text-xl font-montserrat text-[#000000]">
+                    Soya
+                </div>
+                <div class="text-sm text-[#66666b]">
+                    Version: 1.0.0
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 top-0 text-center pointer-events-none overflow-hidden">
+                    <i class="icon-[mdi--sprout] text-[100px] opacity-30 text-[#3FAEA3]"></i>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

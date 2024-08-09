@@ -1,0 +1,83 @@
+version: '3.7'
+
+services:
+  kratos-migrate:
+    image: oryd/kratos:v1.1.0
+    depends_on:
+      - postgres
+    environment:
+      DSN: postgres://kratos:secret@postgres:5432/kratos?sslmode=disable
+    volumes:
+      - ./kratos.yml:/etc/config/kratos/kratos.yml
+      - ./identity.schema.json:/etc/config/kratos/identity.schema.json
+    command: migrate sql -e --config /etc/config/kratos/kratos.yml --yes
+
+  kratos:
+    image: oryd/kratos:v1.1.0
+    depends_on:
+      - postgres
+    environment:
+      DSN: postgres://kratos:secret@postgres:5432/kratos?sslmode=disable
+    ports:
+      - "4433:4433"
+      - "4434:4434"
+    volumes:
+      - ./kratos.yml:/etc/config/kratos/kratos.yml
+      - ./identity.schema.json:/etc/config/kratos/identity.schema.json
+    command: serve --config /etc/config/kratos/kratos.yml
+
+  keto-migrate:
+    image: oryd/keto:v0.12.0-alpha.0
+    depends_on:
+      - postgres_keto
+    volumes:
+      - ./keto.yml:/home/ory/keto.yml
+    environment:
+      - LOG_LEVEL=debug
+    command: ["migrate", "up", "-y"]
+    restart: on-failure
+
+  keto:
+    image: oryd/keto:v0.12.0-alpha.0
+    depends_on:
+      - postgres_keto
+    ports:
+      - "4466:4466"
+      - "4467:4467"
+      - "4468:4468"
+    command: serve -c /home/ory/keto.yml
+    volumes:
+      - ./keto.yml:/home/ory/keto.yml
+
+  postgres_keto:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: keto
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: keto
+    volumes:
+      - keto-db:/var/lib/postgresql/data
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: kratos
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: kratos
+    volumes:
+      - kratos-db:/var/lib/postgresql/data
+
+  couchdb:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: admin
+    ports:
+      - "5984:5984"
+    volumes:
+      - couch-db:/opt/couchdb/data
+
+volumes:
+  kratos-db:
+  keto-db:
+  couch-db:

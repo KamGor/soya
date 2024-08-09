@@ -1,0 +1,54 @@
+version: v1.1.0
+
+dsn: postgres://kratos:secret@postgres:5432/kratos?sslmode=disable
+
+dev: true
+
+log:
+  level: info
+
+serve:
+  public:
+    base_url: http://localhost
+    port: 4433
+    cors:
+      allowed_origins:
+        - http://localhost:4200
+      enabled: true
+      allow_credentials: true
+      options_passthrough: false
+      max_age: 0
+      debug: true
+  admin:
+    base_url: http://localhost
+    port: 4434
+
+session:
+  cookie:
+    name: soya_session
+    persistent: true
+
+identity:
+  schemas:
+    - id: default
+      url: file:///etc/config/kratos/identity.schema.json
+
+selfservice:
+  default_browser_return_url: http://localhost:4200/
+  flows:
+    error:
+      ui_url: http://localhost:4200/error
+    registration:
+      enabled: false
+    login:
+      ui_url: http://localhost:4200/login
+    settings:
+      ui_url: http://localhost:4200/settings
+    verification:
+      ui_url: http://localhost:4200/verification
+    recovery:
+      ui_url: http://localhost:4200/recovery
+
+courier:
+  smtp:
+    connection_uri: smtps://user:password@smtp.example.com:587/?skip_ssl_verify=false&from_address=no-reply@example.com

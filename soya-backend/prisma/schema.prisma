@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ConfigField {
+  id  String @id
+  configValues ConfigValue[]
+  tags Tag[]
+}
+
+model ConfigValue {
+  id String @default(uuid()) @id
+  configField ConfigField @relation(fields: [configFieldId], references: [id], onDelete: Cascade)
+  configFieldId String
+  value String
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  name String @unique @id
+  configFields ConfigField[]
+}

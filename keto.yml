@@ -1,0 +1,22 @@
+version: v0.12.0-alpha.0
+
+log:
+  level: debug
+
+namespaces:
+  - id: 0
+    name: configs
+  - id: 1
+    name: tags
+  - id: 2
+    name: accountTypes
+
+serve:
+  read:
+    port: 4466
+  write:
+    port: 4467
+  opl:
+    port: 4468
+
+dsn: postgres://keto:secret@postgres_keto:5432/keto?sslmode=disable

@@ -1,0 +1,68 @@
+<div class="flex flex-col w-full max-h-full min-h-full pr-[24px] gap-4">
+    <div class="flex flex-row p-4 bg-white rounded-xl justify-between text-[#8E8E93]">
+        <div class="flex flex-row items-center gap-2">
+            <i class="icon-[mdi--tag] text-2xl"></i>
+            <span class="font-bold text-lg">
+                Tag list <span *ngIf="itemsCount > 0">- {{ itemsCount }} <span *ngIf="itemsCount > 1">tags</span><span *ngIf="itemsCount == 1">tag</span></span>
+            </span>
+        </div>
+        <div class="flex flex-row">
+            <a routerLink="add" class="flex flex-row items-center rounded-full p-1">
+                <i class="icon-[mdi--tag-plus] text-2xl"></i>
+            </a>
+            <button title="Help" class="flex flex-row items-center rounded-full p-1">
+                <i class="icon-[mdi--help-circle-outline] text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-col max-h-full min-h-full w-full bg-white rounded-xl flex-[1_1_auto] text-[#8E8E93] justify-stretch items-stretch overflow-hidden">
+        <div class="flex flex-row max-h-full min-h-full justify-stretch items-stretch flex-[1_1_auto]">
+            <p-table [value]="items" [paginator]="true" [scrollable]="true" [loading]="isLoading" ngClass="w-full" scrollHeight="flex" [rows]="pageSize" [totalRecords]="itemsCount" [lazy]="true" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]" (onPage)="handlePageEvent($event)" paginatorDropdownAppendTo="body" [rowHover]="true" paginator>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            no.
+                        </th>
+                        <th class="w-full">
+                            Name
+                        </th>
+                        <th class="w-3/5 text-nowrap">
+                            Configs Amount
+                        </th>
+                        <th class="w-1/4">
+                            Operations
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="200" class="text-center">
+                            No tags found.
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-index="rowIndex">
+                    <tr>
+                        <td>
+                            {{ index + (page * pageSize) + 1 }}
+                        </td>
+                        <td>
+                            {{ item.name }}
+                        </td>
+                        <td>
+                            {{ item.count }}
+                        </td>
+                        <td>
+                            <a routerLink="edit/{{item.name}}" title="Edit">
+                                <i class="icon-[mdi--edit] text-2xl"></i>
+                            </a>
+                            <button type="button" title="Delete" (click)="delete(item.name)">
+                                <i class="icon-[mdi--delete] text-2xl"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
